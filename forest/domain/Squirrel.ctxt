@@ -1,0 +1,25 @@
+#BlueJ class context
+comment0.target=Squirrel
+comment0.text=\r\n\ Squirrel\ class.\r\n\ Squirrel\ is\ brown\ and\ as\ the\ years\ go,\ it\ turns\ yellowish,\r\n\ after\ 10\ years\ dies,\ if\ there\ are\ two\ neighbors\ withan\ empty\ cell\ between\ them,\ \r\n\ a\ new\ squirrel\ is\ born.\r\n\ They\ move\ randomly\ through\ the\ forest\r\n\ \r\n\ @author\ (Murillo-Rubiano)\ \r\n\ \r\n
+comment1.params=forest\ row\ column
+comment1.target=Squirrel(Forest,\ int,\ int)
+comment1.text=\r\n\ Creates\ a\ new\ squirrel\ at\ the\ given\ position\ in\ the\ forest.\r\n\ @param\ forest\r\n\ @param\ row\r\n\ @param\ column\r\n
+comment2.params=
+comment2.target=java.awt.Color\ getColor()
+comment2.text=\r\n\ Returns\ the\ squirrel's\ color,\ brown\ fading\ to\ yellow\r\n
+comment3.params=
+comment3.target=int\ shape()
+comment3.text=\ \r\n\ Return\ the\ squirrel's\ shape\r\n
+comment4.params=
+comment4.target=void\ die()
+comment4.text=\r\n\ Removes\ the\ squirrel\ from\ the\ forest\r\n
+comment5.params=
+comment5.target=void\ ticTac()
+comment5.text=\r\n\ Executes\ one\ simulation\ step\ for\ squirrel.\r\n\ Dies\ after\ 10\ years,\ reproduces,\ and\ moves\ random\r\n
+comment6.params=
+comment6.target=void\ reproduce()
+comment6.text=\r\n\ Cheks\ if\ two\ squirrels\ are\ neighbors\ with\ one\ empty\ cell\ between\ them.\r\n\ If\ so,\ a\ new\ squirrel\ is\ born\ in\ the\ empty\ cell\r\n
+comment7.params=
+comment7.target=void\ move()
+comment7.text=\r\n\ Moves\ the\ squirrel\ to\ a\ random\ empty\ cell\ adjacent.\r\n\ If\ no\ empty\ cell\ is\ available,\ it\ stays\ in\ the\ current\ cell\r\n
+numComments=8

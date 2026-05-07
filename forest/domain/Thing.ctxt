@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=Thing
+comment0.text=No\ olviden\ adicionar\ la\ documentacion
+comment1.params=
+comment1.target=void\ ticTac()
+comment2.params=
+comment2.target=int\ shape()
+comment3.params=
+comment3.target=java.awt.Color\ getColor()
+comment4.params=
+comment4.target=boolean\ isOnlyThing()
+comment5.params=
+comment5.target=boolean\ isLivingThing()
+numComments=6

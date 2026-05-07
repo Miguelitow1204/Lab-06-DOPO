@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=CherryTree
+comment0.text=\r\n\ Represents\ a\ cherry\ tree\ in\ the\ forest.\r\n\ It\ starts\ green\ and\ blooms\ to\ pink\ every\ 4\ tictacs,\ then\ returns\ to\ green.\r\n\ It\ loses\ energy\ and\ die\ when\ it\ is\ 0\r\n\ \r\n\ @author\ (Murillo-Rubiano)\ \r\n\ \r\n
+comment1.params=forest\ row\ column
+comment1.target=CherryTree(Forest,\ int,\ int)
+comment1.text=\r\n\ Creates\ a\ new\ cherry\ tree\ in\ the\ forest\ at\ the\ given\ position\r\n\ @param\ forest\r\n\ @param\ row\r\n\ @param\ column\r\n
+comment2.params=
+comment2.target=void\ ticTac()
+comment2.text=\r\n\ Executes\ one\ simulation\ step\ for\ the\ cherry\ tree.\r\n\ Blooms\ every\ 4\ tic-tac,\ loses\ energy\ and\ die\ when\ it\ is\ 0\r\n
+numComments=3

@@ -1,0 +1,25 @@
+#BlueJ class context
+comment0.target=GlowSpore
+comment0.text=\r\n\ Clase\ que\ representa\ una\ espora\ luminiscente\ en\ el\ bosque.\r\n\ \r\n\ La\ clase\ GlowSpore\ implementa\ la\ interfaz\ Thing\ y\ simula\ el\ comportamiento\r\n\ de\ una\ espora\ que\ emite\ luz\ (fosforescente)\ que\:\r\n\ -\ Parpadea\ alternando\ entre\ morado\ oscuro\ y\ morado\ claro\ en\ cada\ paso\ de\r\n\ simulacion\r\n\ -\ Se\ propaga\ a\ celdas\ adyacentes\ vac\u00EDas\ cada\ 3\ tic-tacs\r\n\ -\ Se\ mueve\ aleatoriamente\ a\ celdas\ adyacentes\ vac\u00EDas\r\n\ -\ Muere\ despues\ de\ 5\ tic-tacs\ de\ existencia\r\n\ \r\n\ @author\ Murillo-Rubiano,\ con\ apoyo\ de\ Claude\ Sonnet\ 4.6\r\n\ @see\ Thing\r\n\ @see\ Forest\r\n
+comment1.params=forest\ row\ column
+comment1.target=GlowSpore(Forest,\ int,\ int)
+comment1.text=\r\n\ Crea\ una\ nueva\ espora\ luminiscente\ en\ la\ posicion\ especificada\ del\ bosque.\r\n\ \r\n\ Inicializa\ la\ espora\ con\:\r\n\ -\ Edad\ inicial\ en\ 0.\r\n\ -\ Fase\ morada\ oscura\ activa\ (purplePhase\ \=\ true).\r\n\ -\ Registro\ inmediato\ de\ la\ espora\ dentro\ de\ la\ grilla\ del\ bosque.\r\n\ \r\n\ @param\ forest\ el\ bosque\ donde\ se\ crea\ la\ espora\r\n\ @param\ row\ \ \ \ la\ fila\ de\ la\ posicion\ (0\ a\ filas-1)\r\n\ @param\ column\ la\ columna\ de\ la\ posicion\ (0\ a\ columnas-1)\r\n
+comment2.params=
+comment2.target=java.awt.Color\ getColor()
+comment2.text=\r\n\ Retorna\ el\ color\ actual\ de\ la\ espora.\r\n\ \r\n\ El\ color\ depende\ de\ la\ fase\ activa\:\r\n\ -\ Fase\ morada\ oscura\:\ (148,\ 0,\ 211)\r\n\ -\ Fase\ morada\ clara\:\ (221,\ 160,\ 221)\r\n\ \r\n\ @return\ el\ color\ correspondiente\ a\ la\ fase\ actual\r\n
+comment3.params=
+comment3.target=int\ shape()
+comment3.text=\r\n\ Retorna\ la\ forma\ de\ la\ espora,\ que\ siempre\ es\ circular.\r\n\ \r\n\ La\ representaci\u00F3n\ visual\ de\ la\ espora\ es\ un\ c\u00EDrculo.\r\n\ \r\n\ @return\ Thing.ROUND\ indicando\ que\ la\ forma\ es\ redonda/circular\r\n
+comment4.params=
+comment4.target=void\ ticTac()
+comment4.text=\r\n\ Ejecuta\ un\ paso\ de\ simulacion\ para\ la\ espora.\r\n\ \r\n\ Orden\ de\ operaciones\ en\ cada\ tic-tac\:\r\n\ 1.\ Incrementa\ la\ edad.\r\n\ 2.\ Si\ la\ edad\ es\ mayor\ o\ igual\ a\ 5,\ la\ espora\ muere\ y\ termina\ el\ paso.\r\n\ 3.\ Alterna\ la\ fase\ de\ color\ para\ simular\ parpadeo.\r\n\ 4.\ Si\ la\ edad\ es\ multiplo\ de\ 3,\ intenta\ propagarse.\r\n\ 5.\ Intenta\ moverse\ a\ una\ celda\ adyacente\ vacia.\r\n
+comment5.params=
+comment5.target=void\ die()
+comment5.text=\r\n\ Elimina\ la\ espora\ del\ bosque.\r\n\ \r\n\ Libera\ la\ celda\ actual\ colocando\ null\ en\ la\ posicion\ ocupada.\r\n
+comment6.params=
+comment6.target=void\ spread()
+comment6.text=\r\n\ Propaga\ una\ nueva\ espora\ a\ una\ celda\ adyacente\ vacia\ elegida\ al\ azar.\r\n\ \r\n\ Considera\ las\ 8\ direcciones\ vecinas\ (incluye\ diagonales).\ Si\ no\ existe\r\n\ ninguna\ celda\ libre,\ no\ se\ crea\ una\ nueva\ espora.\r\n
+comment7.params=
+comment7.target=void\ move()
+comment7.text=\r\n\ Mueve\ la\ espora\ a\ una\ celda\ adyacente\ vacia\ aleatoria.\r\n\ \r\n\ Si\ no\ hay\ celdas\ adyacentes\ vacias\ disponibles,\ la\ espora\ permanece\ en\r\n\ su\ posicion\ actual.\ Se\ eval\u00FAan\ las\ 8\ direcciones\ posibles,\ incluidas\ las\r\n\ diagonales.\r\n
+numComments=8

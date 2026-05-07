@@ -1,0 +1,26 @@
+#BlueJ class context
+comment0.target=ForestTest
+comment0.text=\r\n\ The\ test\ class\ ForestTest.\r\n\r\n\ @author\ (Murillo-Rubiano)\r\n
+comment1.params=
+comment1.target=void\ testTicTacChangeColor()
+comment10.params=
+comment10.target=void\ testImportAsInvalidFile()
+comment11.params=
+comment11.target=void\ testImportAsInvalidType()
+comment2.params=
+comment2.target=void\ testTicTacMultipleTrees()
+comment3.params=
+comment3.target=void\ testSaveAsCreatesFile()
+comment4.params=
+comment4.target=void\ testSaveAsInvalidPath()
+comment5.params=
+comment5.target=void\ testOpenRestoresState()
+comment6.params=
+comment6.target=void\ testOpenInvalidFile()
+comment7.params=
+comment7.target=void\ testExportAsCreatesFile()
+comment8.params=
+comment8.target=void\ testExportAsInvalidPath()
+comment9.params=
+comment9.target=void\ testImportAsRestoresState()
+numComments=12

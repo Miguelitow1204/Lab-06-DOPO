@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.target=Shadow
+comment0.text=\r\n\ Represents\ a\ shadow\ in\ the\ forest.\r\n\ Shadows\ are\ black\ dots\ that\ spread\ darkness\ across\ their\ entire\ row,\r\n\ and\ move\ from\ south\ to\ north\ circularly.\r\n\ \r\n\ @author\ (Murillo-Rubiano)\ \r\n\ \r\n
+comment1.params=forest\ row\ column
+comment1.target=Shadow(Forest,\ int,\ int)
+comment1.text=\r\n\ Creates\ a\ new\ shadow\ at\ the\ given\ position\ in\ the\ forest\r\n\ @param\ forest\r\n\ @param\ row\r\n\ @param\ column\r\n
+comment2.params=
+comment2.target=java.awt.Color\ getColor()
+comment2.text=\r\n\ Return\ black\ color\r\n
+comment3.params=
+comment3.target=int\ shape()
+comment3.text=\r\n\ Returns\ the\ shadow's\ shape\r\n
+comment4.params=
+comment4.target=void\ ticTac()
+comment4.text=\r\n\ Moves\ the\ shadow\ one\ row\ north\ circularly.\r\n\ If\ it\ reaches\ the\ top,\ it\ wraps\ around\ to\ the\ bottom\r\n
+numComments=5

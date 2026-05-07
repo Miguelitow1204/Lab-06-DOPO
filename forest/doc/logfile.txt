@@ -1,0 +1,35 @@
+Project documentation
+<---- javadoc command: ---->
+/usr/lib/jvm/java-8-oracle/bin/javadoc
+-sourcepath
+/home/midr/Dropbox/DOCENCIA/DOPO-2025-02/JAVA/HERENCIA/valley-2025-2/valley
+-source
+1.8
+-classpath
+/usr/share/bluej/bluejcore.jar:/usr/share/bluej/junit-4.11.jar:/usr/share/bluej/hamcrest-core-1.3.jar:/usr/share/bluej/lang-stride.jar:/usr/share/bluej/userlib/pi4j-core.jar:/usr/share/bluej/userlib/pi4j-service.jar:/usr/share/bluej/userlib/pi4j-device.jar:/usr/share/bluej/userlib/pi4j-gpio-extension.jar:/home/midr/Dropbox/DOCENCIA/DOPO-2025-02/JAVA/HERENCIA/valley-2025-2/valley
+-d
+/home/midr/Dropbox/DOCENCIA/DOPO-2025-02/JAVA/HERENCIA/valley-2025-2/valley/doc
+-encoding
+UTF-8
+-charset
+UTF-8
+-doctitle
+valley
+-windowtitle
+valley
+-author
+-version
+-nodeprecated
+-package
+-Xdoclint:none
+-link
+http://download.oracle.com/javase/8/docs/api/
+presentation
+domain
+<---- end of javadoc command ---->
+Loading source files for package presentation...
+Loading source files for package domain...
+Constructing Javadoc information...
+Standard Doclet version 1.8.0_201
+Building tree for all the packages and classes...
+Generating /home/midr/Dropbox/DOCENCIA/DOPO-2025-02/JAVA/HERENCIA/valley-2025-2/valley/doc/presentation/PhotoValley.html...

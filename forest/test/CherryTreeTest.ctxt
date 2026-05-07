@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=CherryTreeTest
+comment0.text=\r\n\ The\ test\ class\ CherryTreeTest.\r\n\r\n\ @author\ \ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=
+comment1.target=void\ testCherryTreeInitialColor()
+comment2.params=
+comment2.target=void\ testCherryTreeBlooms()
+comment3.params=
+comment3.target=void\ testCherryTreeReturnsToGreen()
+numComments=4
