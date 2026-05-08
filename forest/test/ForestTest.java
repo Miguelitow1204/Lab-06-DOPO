@@ -31,11 +31,11 @@ public class ForestTest {
         assertEquals(Color.GREEN, beard.getColor());
         assertEquals(Color.GREEN, soul.getColor());
     }
-    
+
     @Test
     public void testSaveAsCreatesFile() {
         Forest forest = new Forest();
-        //Creamos un archivo temporal en el directorio del proyecto
+        // Creamos un archivo temporal en el directorio del proyecto
         java.io.File file = new java.io.File("forestTest.dat");
         try {
             forest.saveAs(file);
@@ -61,7 +61,7 @@ public class ForestTest {
             assertNotNull(e.getMessage());
         }
     }
-    
+
     @Test
     public void testOpenRestoresState() {
         Forest forest = new Forest();
@@ -98,7 +98,7 @@ public class ForestTest {
             assertNotNull(e.getMessage());
         }
     }
-    
+
     @Test
     public void testExportAsCreatesFile() {
         Forest forest = new Forest();
@@ -124,7 +124,7 @@ public class ForestTest {
             assertNotNull(e.getMessage());
         }
     }
-    
+
     @Test
     public void testImportAsRestoresState() {
         Forest forest = new Forest();
@@ -177,5 +177,50 @@ public class ForestTest {
             fail("Error al crear el archivo de prueba");
         }
         file.delete();
+    }
+
+    // Pruebas Parte III - A.2: Excepciones detalladas para Open y SaveAs
+
+    @Test
+    public void testOpenFileNotFound() {
+        Forest forest = new Forest();
+        java.io.File file = new java.io.File("noExiste.dat");
+        try {
+            forest.open(file);
+            fail("Debería lanzar ForestException");
+        } catch (ForestException e) {
+            assertTrue(e.getMessage().contains("no fue encontrado"));
+        }
+    }
+
+    @Test
+    public void testOpenCorruptedFile() {
+        Forest forest = new Forest();
+        java.io.File file = new java.io.File("corrupto.dat");
+        try {
+            // Crear un archivo con contenido basura
+            java.io.PrintWriter writer = new java.io.PrintWriter(new java.io.FileWriter(file));
+            writer.println("esto no es un objeto serializado");
+            writer.close();
+            forest.open(file);
+            fail("Debería lanzar ForestException");
+        } catch (ForestException e) {
+            assertTrue(e.getMessage().contains("corrupto"));
+        } catch (java.io.IOException e) {
+            fail("Error al crear archivo de prueba");
+        }
+        file.delete();
+    }
+
+    @Test
+    public void testSaveAsInvalidPathDetailed() {
+        Forest forest = new Forest();
+        java.io.File file = new java.io.File("/ruta/invalida/forest.dat");
+        try {
+            forest.saveAs(file);
+            fail("Debería lanzar ForestException");
+        } catch (ForestException e) {
+            assertTrue(e.getMessage().contains("Error de escritura"));
+        }
     }
 }
