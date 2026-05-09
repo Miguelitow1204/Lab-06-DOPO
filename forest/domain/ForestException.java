@@ -2,7 +2,7 @@ package domain;
 
 
 /**
- * Write a description of class ForestException here.
+ * Exception class for Forest
  * 
  * @author (Murillo-Rubiano) 
  * @version (1.0)

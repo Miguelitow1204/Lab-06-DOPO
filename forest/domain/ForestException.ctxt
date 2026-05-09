@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=ForestException
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ ForestException\ here.\r\n\ \r\n\ @author\ (Murillo-Rubiano)\ \r\n\ @version\ (1.0)\r\n
+comment0.text=\r\n\ Exception\ class\ for\ Forest\r\n\ \r\n\ @author\ (Murillo-Rubiano)\ \r\n\ @version\ (1.0)\r\n
 comment1.params=message
 comment1.target=ForestException(java.lang.String)
 numComments=2
