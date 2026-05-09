@@ -223,4 +223,66 @@ public class ForestTest {
             assertTrue(e.getMessage().contains("Error de escritura"));
         }
     }
+
+    // Pruebas Parte III - B.2: Excepciones detalladas importar/exportar
+
+    @Test
+    public void testImportFileNotFound() {
+        Forest forest = new Forest();
+        java.io.File file = new java.io.File("noExiste.txt");
+        try {
+            forest.importAs(file);
+            fail("Debería lanzar ForestException");
+        } catch (ForestException e) {
+            assertTrue(e.getMessage().contains("no fue encontrado"));
+        }
+    }
+
+    @Test
+    public void testImportInvalidCoordinates() {
+        Forest forest = new Forest();
+        java.io.File file = new java.io.File("coordInvalidas.txt");
+        try {
+            java.io.PrintWriter writer = new java.io.PrintWriter(new java.io.FileWriter(file));
+            writer.println("Tree abc, xyz");
+            writer.close();
+            forest.importAs(file);
+            fail("Debería lanzar ForestException");
+        } catch (ForestException e) {
+            assertTrue(e.getMessage().contains("no numéricas"));
+        } catch (java.io.IOException e) {
+            fail("Error al crear archivo de prueba");
+        }
+        file.delete();
+    }
+
+    @Test
+    public void testImportOutOfRange() {
+        Forest forest = new Forest();
+        java.io.File file = new java.io.File("fueraRango.txt");
+        try {
+            java.io.PrintWriter writer = new java.io.PrintWriter(new java.io.FileWriter(file));
+            writer.println("Tree 99, 99");
+            writer.close();
+            forest.importAs(file);
+            fail("Debería lanzar ForestException");
+        } catch (ForestException e) {
+            assertTrue(e.getMessage().contains("fuera de rango"));
+        } catch (java.io.IOException e) {
+            fail("Error al crear archivo de prueba");
+        }
+        file.delete();
+    }
+
+    @Test
+    public void testExportInvalidPathDetailed() {
+        Forest forest = new Forest();
+        java.io.File file = new java.io.File("/ruta/invalida/forest.txt");
+        try {
+            forest.exportAs(file);
+            fail("Debería lanzar ForestException");
+        } catch (ForestException e) {
+            assertTrue(e.getMessage().contains("Error de escritura"));
+        }
+    }
 }

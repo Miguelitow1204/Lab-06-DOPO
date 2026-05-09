@@ -248,27 +248,67 @@ public class Forest implements Serializable {
         throw new ForestException("Opción Save en construcción. Archivo " + file.getName());
     }
 
+    /**
+     * Importa objetos desde un archivo de texto simple y reemplaza el contenido
+     * actual del bosque.
+     *
+     * Formato esperado por línea: "Tipo fila, columna". Ejemplos:
+     * Tree 3, 5
+     * CherryTree 10, 2
+     *
+     * Comportamiento:
+     * - Borra el contenido actual del bosque (todas las celdas quedan vacías).
+     * - Por cada línea válida crea una instancia del tipo indicado posicionada
+     * en las coordenadas (fila, columna) usando el constructor correspondiente.
+     * - Valida formato, coordenadas y tipo; en caso de error lanza
+     * {@code ForestException} con un mensaje descriptivo.
+     *
+     * Tipos soportados: Tree, CherryTree, Squirrel, Shadow, GlowSpore.
+     *
+     * Excepciones:
+     * - {@code ForestException} si el archivo no existe, hay errores de
+     * lectura, formato inválido, coordenadas fuera de rango o tipo desconocido.
+     *
+     * Autores: MurilloRubiano con apoyo de Claude Opus 4.6
+     *
+     * @param file archivo de entrada con la lista de objetos a importar.
+     * @throws ForestException en caso de cualquier error de E/S o formato.
+     */
     public void importAs(java.io.File file) throws ForestException {
         try {
             java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.FileReader(file));
-            // Limpiar el forest actual antes de importar
             for (int r = 0; r < SIZE; r++) {
                 for (int c = 0; c < SIZE; c++) {
                     places[r][c] = null;
                 }
             }
             String line;
-            // Leer cada línea del archivo
+            int lineNumber = 0;
             while ((line = reader.readLine()) != null) {
+                lineNumber++;
                 line = line.trim();
                 if (!line.isEmpty()) {
-                    // Separar tipo de coordenadas
                     String[] parts = line.split(" ");
+                    if (parts.length < 3) {
+                        reader.close();
+                        throw new ForestException("Formato inválido en la línea " + lineNumber
+                                + ": se esperaban 3 elementos (Tipo fila, columna).");
+                    }
                     String type = parts[0];
-                    // Separar fila y columna por la coma
-                    int r = Integer.parseInt(parts[1].replace(",", "").trim());
-                    int c = Integer.parseInt(parts[2].trim());
-                    // Crear el objeto según el tipo
+                    int r, c;
+                    try {
+                        r = Integer.parseInt(parts[1].replace(",", "").trim());
+                        c = Integer.parseInt(parts[2].trim());
+                    } catch (NumberFormatException e) {
+                        reader.close();
+                        throw new ForestException("Coordenadas no numéricas en la línea " + lineNumber + ": '"
+                                + parts[1] + " " + parts[2] + "'.");
+                    }
+                    if (r < 0 || r >= SIZE || c < 0 || c >= SIZE) {
+                        reader.close();
+                        throw new ForestException("Coordenadas fuera de rango en la línea " + lineNumber + ": (" + r
+                                + ", " + c + "). Rango válido: 0 a " + (SIZE - 1) + ".");
+                    }
                     if (type.equals("Tree")) {
                         new Tree(this, r, c);
                     } else if (type.equals("CherryTree")) {
@@ -280,35 +320,58 @@ public class Forest implements Serializable {
                     } else if (type.equals("GlowSpore")) {
                         new GlowSpore(this, r, c);
                     } else {
-                        throw new ForestException("Error al importar el archivo " + file.getName());
+                        reader.close();
+                        throw new ForestException("Tipo desconocido en la línea " + lineNumber + ": '" + type + "'.");
                     }
                 }
             }
             reader.close();
+        } catch (java.io.FileNotFoundException e) {
+            throw new ForestException("El archivo " + file.getName() + " no fue encontrado.");
         } catch (java.io.IOException e) {
-            throw new ForestException("Error al importar el archivo " + file.getName());
+            throw new ForestException("Error de lectura al importar el archivo " + file.getName() + ".");
         }
     }
 
+    /**
+     * Exporta el estado actual del bosque a un archivo de texto simple.
+     *
+     * Cada línea del archivo resultante tiene el formato:
+     * Tipo fila, columna
+     * donde {@code Tipo} es el nombre simple de la clase (por ejemplo, Tree).
+     *
+     * Reglas:
+     * - Cada objeto se escribe una sola vez (se evita duplicar instancias
+     * referenciadas desde varias celdas).
+     * - El orden es por recorrido por filas y luego por columnas.
+     *
+     * Excepciones:
+     * - {@code ForestException} si falta permiso de escritura o ocurre un error de
+     * E/S.
+     *
+     * Autores: MurilloRubiano con apoyo de Claude Opus 4.6
+     *
+     * @param file archivo de salida donde se volcará la lista de objetos.
+     * @throws ForestException en caso de cualquier error de E/S.
+     */
     public void exportAs(java.io.File file) throws ForestException {
         try {
             java.io.PrintWriter writer = new java.io.PrintWriter(new java.io.FileWriter(file));
-            // Lista para registrar los objetos ya exportados y evitar duplicados
             java.util.List<Thing> exported = new java.util.ArrayList<>();
             for (int r = 0; r < SIZE; r++) {
                 for (int c = 0; c < SIZE; c++) {
                     if (places[r][c] != null && !exported.contains(places[r][c])) {
-                        // Marcar este objeto como ya exportado
                         exported.add(places[r][c]);
                         String type = places[r][c].getClass().getSimpleName();
-                        // Formato estándar: tipo fila, columna
                         writer.println(type + " " + r + ", " + c);
                     }
                 }
             }
             writer.close();
+        } catch (SecurityException e) {
+            throw new ForestException("No tiene permisos para exportar el archivo " + file.getName() + ".");
         } catch (java.io.IOException e) {
-            throw new ForestException("Error al exportar el archivo " + file.getName());
+            throw new ForestException("Error de escritura al exportar el archivo " + file.getName() + ".");
         }
     }
 
@@ -349,6 +412,62 @@ public class Forest implements Serializable {
             throw new ForestException("Error al abrir el archivo " + file.getName());
         } catch (ClassNotFoundException e) {
             throw new ForestException("El archivo " + file.getName() + "no es un forest válido.");
+        }
+    }
+
+    public void importAs01(java.io.File file) throws ForestException {
+        try {
+            java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.FileReader(file));
+            for (int r = 0; r < SIZE; r++) {
+                for (int c = 0; c < SIZE; c++) {
+                    places[r][c] = null;
+                }
+            }
+            String line;
+            while ((line = reader.readLine()) != null) {
+                line = line.trim();
+                if (!line.isEmpty()) {
+                    String[] parts = line.split(" ");
+                    String type = parts[0];
+                    int r = Integer.parseInt(parts[1].replace(",", "").trim());
+                    int c = Integer.parseInt(parts[2].trim());
+                    if (type.equals("Tree")) {
+                        new Tree(this, r, c);
+                    } else if (type.equals("CherryTree")) {
+                        new CherryTree(this, r, c);
+                    } else if (type.equals("Squirrel")) {
+                        new Squirrel(this, r, c);
+                    } else if (type.equals("Shadow")) {
+                        new Shadow(this, r, c);
+                    } else if (type.equals("GlowSpore")) {
+                        new GlowSpore(this, r, c);
+                    } else {
+                        throw new ForestException("Error al importar el archivo " + file.getName());
+                    }
+                }
+            }
+            reader.close();
+        } catch (java.io.IOException e) {
+            throw new ForestException("Error al importar el archivo " + file.getName());
+        }
+    }
+
+    public void exportAs01(java.io.File file) throws ForestException {
+        try {
+            java.io.PrintWriter writer = new java.io.PrintWriter(new java.io.FileWriter(file));
+            java.util.List<Thing> exported = new java.util.ArrayList<>();
+            for (int r = 0; r < SIZE; r++) {
+                for (int c = 0; c < SIZE; c++) {
+                    if (places[r][c] != null && !exported.contains(places[r][c])) {
+                        exported.add(places[r][c]);
+                        String type = places[r][c].getClass().getSimpleName();
+                        writer.println(type + " " + r + ", " + c);
+                    }
+                }
+            }
+            writer.close();
+        } catch (java.io.IOException e) {
+            throw new ForestException("Error al exportar el archivo " + file.getName());
         }
     }
 
